@@ -1,7 +1,17 @@
+# 目录
+## node.js安装
+## npm 的使用
+## node.js 升级
+## nvm 的安装及使用
+## 查看远程node.js版本信息
+## 查看本地所有node.js版本信息
 
+----------------------------------------------------
 # Node.js 安装
 ## ubuntu 下的安装
 ### 安装node.js的方法
+### package.json文件的配置
+
 ```
 $ curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
 $ sudo apt-get install -y nodejs
