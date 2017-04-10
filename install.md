@@ -142,6 +142,98 @@ $ npm install express --save-dev
 对应的版本可以加上各种限定,只要有以下几种:  
 > 指定版本：比如1.2.2，遵循“大版本.次要版本.小版本”的格式规定，安装时只安装指定版本。
 >> * 波浪号（tilde）+指定版本：比如~1.2.2，表示安装1.2.x的最新版本（不低于1.2.2），但是不安装1.3.x，也就是说安装时不改变大版本号和次要版本号。
-   * 插入号（caret）+指定版本：比如ˆ1.2.2，表示安装1.x.x的最新版本（不低于1.2.2），但是不安装2.x.x，也就是说安装时不改变大版本号。  
+>>  * 插入号（caret）+指定版本：比如ˆ1.2.2，表示安装1.x.x的最新版本（不低于1.2.2），但是不安装2.x.x，也就是说安装时不改变大版本号。  
      需要注意的是:如果大版本号为0，则插入号的行为与波浪号相同，这是因为此时处于开发阶段，即使是次要版本号变动，也可能带来程序的不兼容。
-  *  latest：安装最新版本。
+>>  *  latest：安装最新版本。
+
+# Node.js 升级
+node有一个模块叫 `n`，是专门用来管理 `node.js `的版本安装并将当前的`nodejs`版本升级为`stable`最新版本
+```
+$ npm install -g n        //安装nodejs
+$ sudo n stable           //升级nodejs到stable版本
+```
+显示当前nodejs版本信息
+```
+$ node -v
+```
+## Nvm 使用
+总的来说，`nvm`有点类似于 `Python` 的 `virtualenv` 或者 `Ruby` 的 `rvm`，  
+每个`node`版本的模块都会被安装在各自版本的沙箱里面（因此切换版本后模块需重新安装），  
+因此考虑到需要时常对`node`版本进行切换测试兼容性和一些模块对`node`版本的限制，我选择了使用`nvm`作为管理工具，  
+下面就来说说`nvm`的安装和使用过程。
+### nvm 安装
+```
+ $ curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.30.2/install.sh | bash
+```
+完成后`nvm`就被安装在了 `~/.nvm `下啦，接下来就需要配一下环境变量了，如果你也使用了` zsh `的话，  
+就需要在` ~/.zshrc `这个配置文件中配置，否则就找找看` ~/.bash_profile` 或者 `~/.profile` 吧。  
+
+在 Ubuntu 下 直接 操作 vim ~/.bashrc ,在最后一行上加上:
+```js
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" # This loads nvm
+```
+在执行下面一步操作,作用是每次新打开一个bash,nvm都会被自动添加到环境变量中了.  
+```
+$ . ./bashrc
+```
+配置完成后,输入 `source~/.zshrc`重新启动一下配置
+```
+
+输入`nvm`可以看到如下信息:
+```
+➜  ~  nvm
+
+Node Version Manager
+
+Note: <version> refers to any version-like string nvm understands. This includes:
+  - full or partial version numbers, starting with an optional "v" (0.10, v0.1.2, v1)
+  - default (built-in) aliases: node, stable, unstable, iojs, system
+  - custom aliases you define with `nvm alias foo`
+
+Usage:
+  nvm help                                  Show this message
+  nvm --version                             Print out the latest released version of nvm
+  nvm install [-s] <version>                Download and install a <version>, [-s] from source. Uses .nvmrc if available
+    --reinstall-packages-from=<version>     When installing, reinstall packages installed in <node|iojs|node version number>
+  nvm uninstall <version>                   Uninstall a version
+  nvm use [--silent] <version>              Modify PATH to use <version>. Uses .nvmrc if available
+  nvm exec [--silent] <version> [<command>] Run <command> on <version>. Uses .nvmrc if available
+  nvm run [--silent] <version> [<args>]     Run `node` on <version> with <args> as arguments. Uses .nvmrc if available
+  nvm current                               Display currently activated version
+  nvm ls                                    List installed versions
+  nvm ls <version>                          List versions matching a given description
+  nvm ls-remote                             List remote versions available for install
+  nvm version <version>                     Resolve the given description to a single local version
+  nvm version-remote <version>              Resolve the given description to a single remote version
+  nvm deactivate                            Undo effects of `nvm` on current shell
+  nvm alias [<pattern>]                     Show all aliases beginning with <pattern>
+  nvm alias <name> <version>                Set an alias named <name> pointing to <version>
+  nvm unalias <name>                        Deletes the alias named <name>
+  nvm reinstall-packages <version>          Reinstall global `npm` packages contained in <version> to current version
+  nvm unload                                Unload `nvm` from shell
+  nvm which [<version>]                     Display path to installed node version. Uses .nvmrc if available
+
+Example:
+  nvm install v0.10.32                  Install a specific version number
+  nvm use 0.10                          Use the latest available 0.10.x release
+  nvm run 0.10.32 app.js                Run app.js using node v0.10.32
+  nvm exec 0.10.32 node app.js          Run `node app.js` with the PATH pointing to node v0.10.32
+  nvm alias default 0.10.32             Set default node version on a shell
+
+Note:
+  to remove, delete, or uninstall nvm - just remove the `$NVM_DIR` folder (usually `~/.nvm`)
+
+
+```
+
+# 查看远程node.js版本信息
+我们可以查看现在官方网站有多少个最新版本
+```
+$ nvm ls-remote
+```
+# 查看本地所有node.js版本信息
+可以查看我们现在使用的是那个版本
+```
+$ nvm ls
+```
