@@ -250,3 +250,21 @@ $ nvm ls-remote
 ```
 $ nvm ls
 ```
+# 简单运行node.js 的DEMO
+我们现在需要写一个简单的例子, 测试一下是否安装成功. 现在打开编辑工具, 编写下在面的代码块. 创建一个叫`demo.js`的文件.
+```js
+var http = require('http');
+var serv = http.createServer(function(req, res){
+    res.writeHead(200, {'Content-Type': 'text/html'});
+    res.end('<h1>Hello Welcome to Node.js!</h1>');
+});
+serv.listen(3000);
+```
+需要运行node.js命令：
+```
+$ node demo.js 
+```
+打开浏览器访问`http//127.0.0.1:3000`. 可以看到我们刚才写的`Hello Welcome to Node.js!`句话.  
+
+这就是用最Node.js实现最简单的HTTP服务器就这样延生了. 这个程序调用了Node.js提供的http模块.对所有http请求答复同样的内容监听3000端口.
+
