@@ -178,10 +178,9 @@ export NVM_DIR="$HOME/.nvm"
 $ . ./bashrc
 ```
 配置完成后,输入 `source~/.zshrc`重新启动一下配置
-```
 
 输入`nvm`可以看到如下信息:
-```
+```json
 ➜  ~  nvm
 
 Node Version Manager
