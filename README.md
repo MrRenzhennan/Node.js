@@ -7,6 +7,6 @@
 
 ## [Node.js 官方网站](https://nodejs.org/en/)
 
-## [Node.js 中文文档](www.nodejs.cn)
+## [Node.js 中文文档](https://nodejs.cn)
 
 ## [Node.js 相关书籍](./Book.md)
